@@ -4,6 +4,35 @@ import { protect, AuthRequest } from '../middleware/auth';
 
 const router = Router();
 
+// @route   GET /api/products/inventory/status
+// @desc    Get inventory status for all products
+// @access  Public
+router.get('/inventory/status', async (req, res) => {
+  try {
+    const products = await Product.find({}, 'name inventory maxInventory category');
+    
+    const inventoryStatus = products.map(p => ({
+      id: p._id,
+      name: p.name,
+      category: p.category,
+      inventory: p.inventory,
+      maxInventory: p.maxInventory,
+      available: p.inventory > 0
+    }));
+
+    res.json({
+      success: true,
+      data: inventoryStatus
+    });
+  } catch (error) {
+    console.error('Get inventory status error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error'
+    });
+  }
+});
+
 // @route   GET /api/products
 // @desc    Get all products with optional filtering
 // @access  Public

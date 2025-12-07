@@ -111,12 +111,18 @@ router.post('/', protect, async (req: AuthRequest, res: Response) => {
     const totalAmount = subtotal + deliveryCharge - discount;
 
     // Deduct inventory
+    console.log('Starting inventory deduction...');
     for (const item of cart.items) {
-      await Product.findByIdAndUpdate(
+      const productBefore = await Product.findById(item.product._id).session(session);
+      console.log(`Product ${productBefore?.name} - Inventory before: ${productBefore?.inventory}, Deducting: ${item.quantity}`);
+      
+      const updatedProduct = await Product.findByIdAndUpdate(
         item.product._id,
         { $inc: { inventory: -item.quantity } },
-        { session }
+        { session, new: true }
       );
+      
+      console.log(`Product ${updatedProduct?.name} - Inventory after: ${updatedProduct?.inventory}`);
     }
 
     // Create order items
@@ -157,6 +163,16 @@ router.post('/', protect, async (req: AuthRequest, res: Response) => {
     await cart.save({ session });
 
     await session.commitTransaction();
+    console.log('Transaction committed successfully. Inventory updated in MongoDB.');
+
+    // Verify inventory was updated in database
+    const verifyProducts = await Product.find({ 
+      _id: { $in: cart.items.map(item => item.product._id) } 
+    });
+    console.log('Verification - Current inventory in DB:');
+    verifyProducts.forEach(p => {
+      console.log(`  ${p.name}: ${p.inventory} units`);
+    });
 
     res.status(201).json({
       success: true,
