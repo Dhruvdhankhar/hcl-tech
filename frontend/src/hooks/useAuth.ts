@@ -3,88 +3,100 @@
 import { useEffect, useCallback } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/navigation';
+import { 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  updateProfile,
+  User as FirebaseUser
+} from 'firebase/auth';
+import { auth } from '@/lib/firebase';
 import { authState, tokenState } from '@/store';
-import { authAPI } from '@/lib/api';
 import toast from 'react-hot-toast';
 
 export function useAuth() {
-  const [auth, setAuth] = useRecoilState(authState);
+  const [authStateValue, setAuth] = useRecoilState(authState);
   const setToken = useSetRecoilState(tokenState);
   const router = useRouter();
 
-  // Define fetchUser before useEffect to satisfy dependency ordering
-  const fetchUser = useCallback(async () => {
-    try {
-      const response = await authAPI.getMe();
-      setAuth({
-        user: response.data.data,
-        isAuthenticated: true,
-        isLoading: false,
-      });
-    } catch {
-      localStorage.removeItem('token');
-      setToken(null);
-      setAuth({
-        user: null,
-        isAuthenticated: false,
-        isLoading: false,
-      });
-    }
-  }, [setAuth, setToken]);
-
-  // Check auth status on mount
+  // Listen to Firebase auth state changes
   useEffect(() => {
-    const storedToken = localStorage.getItem('token');
-    if (storedToken && !auth.user) {
-      setToken(storedToken);
-      fetchUser();
-    } else if (!storedToken) {
-      setAuth((prev) => ({ ...prev, isLoading: false }));
-    }
-  }, [auth.user, fetchUser, setAuth, setToken]);
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser: FirebaseUser | null) => {
+      if (firebaseUser) {
+        // User is signed in
+        const token = await firebaseUser.getIdToken();
+        localStorage.setItem('token', token);
+        setToken(token);
+        
+        setAuth({
+          user: {
+            _id: firebaseUser.uid,
+            name: firebaseUser.displayName || '',
+            email: firebaseUser.email || '',
+            phone: firebaseUser.phoneNumber || '',
+            addresses: [],
+            createdAt: firebaseUser.metadata.creationTime || '',
+            updatedAt: firebaseUser.metadata.lastSignInTime || '',
+          },
+          isAuthenticated: true,
+          isLoading: false,
+        });
+      } else {
+        // User is signed out
+        localStorage.removeItem('token');
+        setToken(null);
+        setAuth({
+          user: null,
+          isAuthenticated: false,
+          isLoading: false,
+        });
+      }
+    });
+
+    return () => unsubscribe();
+  }, [setAuth, setToken]);
 
   const login = useCallback(
     async (email: string, password: string) => {
       try {
         setAuth((prev) => ({ ...prev, isLoading: true }));
-        const response = await authAPI.login({ email, password });
-        const { token: newToken, user } = response.data;
-
-        localStorage.setItem('token', newToken);
-        setToken(newToken);
-        setAuth({
-          user,
-          isAuthenticated: true,
-          isLoading: false,
-        });
-
+        await signInWithEmailAndPassword(auth, email, password);
+        
         toast.success('Login successful!');
         router.push('/');
         return { success: true };
       } catch (error: unknown) {
         setAuth((prev) => ({ ...prev, isLoading: false }));
-        const err = error as { response?: { data?: { message?: string } } };
-        const message = err.response?.data?.message || 'Login failed';
+        const err = error as { code?: string; message?: string };
+        let message = 'Login failed';
+        
+        if (err.code === 'auth/user-not-found') {
+          message = 'No account found with this email';
+        } else if (err.code === 'auth/wrong-password') {
+          message = 'Incorrect password';
+        } else if (err.code === 'auth/invalid-email') {
+          message = 'Invalid email address';
+        } else if (err.code === 'auth/too-many-requests') {
+          message = 'Too many failed attempts. Please try again later';
+        }
+        
         toast.error(message);
         return { success: false, message };
       }
     },
-    [router, setAuth, setToken]
+    [router, setAuth]
   );
 
   const register = useCallback(
     async (data: { name: string; email: string; password: string; phone: string }) => {
       try {
         setAuth((prev) => ({ ...prev, isLoading: true }));
-        const response = await authAPI.register(data);
-        const { token: newToken, user } = response.data;
-
-        localStorage.setItem('token', newToken);
-        setToken(newToken);
-        setAuth({
-          user,
-          isAuthenticated: true,
-          isLoading: false,
+        const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+        
+        // Update user profile with name
+        await updateProfile(userCredential.user, {
+          displayName: data.name,
         });
 
         toast.success('Registration successful!');
@@ -92,40 +104,40 @@ export function useAuth() {
         return { success: true };
       } catch (error: unknown) {
         setAuth((prev) => ({ ...prev, isLoading: false }));
-        const err = error as { response?: { data?: { message?: string } } };
-        const message = err.response?.data?.message || 'Registration failed';
+        const err = error as { code?: string; message?: string };
+        let message = 'Registration failed';
+        
+        if (err.code === 'auth/email-already-in-use') {
+          message = 'Email already registered';
+        } else if (err.code === 'auth/invalid-email') {
+          message = 'Invalid email address';
+        } else if (err.code === 'auth/weak-password') {
+          message = 'Password should be at least 6 characters';
+        }
+        
         toast.error(message);
         return { success: false, message };
       }
     },
-    [router, setAuth, setToken]
+    [router, setAuth]
   );
 
   const logout = useCallback(async () => {
     try {
-      await authAPI.logout();
-    } catch {
-      // Ignore logout errors
-    } finally {
-      localStorage.removeItem('token');
-      setToken(null);
-      setAuth({
-        user: null,
-        isAuthenticated: false,
-        isLoading: false,
-      });
+      await signOut(auth);
       toast.success('Logged out successfully');
       router.push('/login');
+    } catch {
+      toast.error('Failed to log out');
     }
-  }, [router, setAuth, setToken]);
+  }, [router]);
 
   return {
-    user: auth.user,
-    isAuthenticated: auth.isAuthenticated,
-    isLoading: auth.isLoading,
+    user: authStateValue.user,
+    isAuthenticated: authStateValue.isAuthenticated,
+    isLoading: authStateValue.isLoading,
     login,
     register,
     logout,
-    fetchUser,
   };
 }
