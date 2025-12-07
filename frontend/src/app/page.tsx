@@ -31,14 +31,14 @@ const features = [
 
 const categories = [
   {
-    name: 'Pizza',
+    name: 'Pizzas',
     image: '/images/pizza.jpg',
     href: '/menu?category=pizza',
   },
   {
-    name: 'Sides & Beverages',
+    name: 'Beverages',
     image: '/images/sides.jpg',
-    href: '/menu?category=sides',
+    href: '/menu?category=beverages',
   },
   {
     name: 'Desserts',

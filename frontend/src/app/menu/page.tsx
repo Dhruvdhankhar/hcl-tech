@@ -1,34 +1,26 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Search, Filter, X } from 'lucide-react';
 import { Header, Footer } from '@/components/layout';
 import { ProductList } from '@/components/product';
-import { Button, Input, SectionLoader, Badge } from '@/components/ui';
-import { useProducts } from '@/hooks';
+import { Button, Input, Badge } from '@/components/ui';
+import { menuItems } from '@/data/menuItems';
  
 
 const categories = [
   { id: 'all', name: 'All' },
-  { id: 'veg-pizza', name: 'Veg Pizzas' },
-  { id: 'non-veg-pizza', name: 'Non-Veg Pizzas' },
-  { id: 'sides', name: 'Sides' },
+  { id: 'pizza', name: 'Pizzas' },
   { id: 'beverages', name: 'Beverages' },
   { id: 'desserts', name: 'Desserts' },
 ];
 
 export default function MenuPage() {
-  const { products, isLoading, fetchProducts, selectedCategory, setCategory } = useProducts();
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState(false);
 
-  useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
-
-  // Product interactions are handled within ProductCard/PizzaCustomizer components
-
-  const filteredProducts = products.filter((product) => {
+  const filteredProducts = menuItems.filter((product) => {
     const matchesCategory = selectedCategory === null || product.category === selectedCategory;
     const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.description.toLowerCase().includes(searchQuery.toLowerCase());
@@ -87,7 +79,7 @@ export default function MenuPage() {
                 key={cat.id}
                 variant={selectedCategory === (cat.id === 'all' ? null : cat.id) ? 'primary' : 'outline'}
                 size="sm"
-                onClick={() => setCategory(cat.id === 'all' ? null : cat.id)}
+                onClick={() => setSelectedCategory(cat.id === 'all' ? null : cat.id)}
               >
                 {cat.name}
               </Button>
@@ -104,7 +96,7 @@ export default function MenuPage() {
                 variant={selectedCategory === (cat.id === 'all' ? null : cat.id) ? 'primary' : 'outline'}
                 size="sm"
                 onClick={() => {
-                  setCategory(cat.id === 'all' ? null : cat.id);
+                  setSelectedCategory(cat.id === 'all' ? null : cat.id);
                   setShowFilters(false);
                 }}
               >
@@ -127,7 +119,7 @@ export default function MenuPage() {
                   variant="ghost"
                   size="sm"
                   aria-label="Clear category"
-                  onClick={() => setCategory(null)}
+                  onClick={() => setSelectedCategory(null)}
                 >
                   <X className="w-3 h-3" />
                 </Button>
@@ -150,16 +142,14 @@ export default function MenuPage() {
         )}
 
         {/* Products */}
-        {isLoading ? (
-          <SectionLoader />
-        ) : filteredProducts.length === 0 ? (
+        {filteredProducts.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-gray-500">No products found</p>
             <Button
               variant="outline"
               className="mt-4"
               onClick={() => {
-                setCategory('all');
+                setSelectedCategory(null);
                 setSearchQuery('');
               }}
             >
