@@ -29,9 +29,6 @@ export function useCart() {
     async (data: {
       productId: string;
       quantity: number;
-      size: string;
-      crust: string;
-      toppings: string[];
     }) => {
       try {
         setCart((prev) => ({ ...prev, isLoading: true }));
@@ -123,11 +120,7 @@ export function useCart() {
     (item: CartItem) => {
       setCart((prev) => {
         const existingIndex = prev.items.findIndex(
-          (i) =>
-            i.product._id === item.product._id &&
-            i.size === item.size &&
-            i.crust === item.crust &&
-            JSON.stringify(i.toppings.sort()) === JSON.stringify(item.toppings.sort())
+          (i) => i.product._id === item.product._id
         );
 
         if (existingIndex > -1) {

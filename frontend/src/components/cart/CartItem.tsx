@@ -35,15 +35,9 @@ export default function CartItem({ item }: CartItemProps) {
               <h3 className="font-semibold text-gray-900 truncate">
                 {item.product.name}
               </h3>
-              <p className="text-sm text-gray-500 mt-0.5">
-                {item.size && <span className="capitalize">{item.size}</span>}
-                {item.crust && <span> • {item.crust}</span>}
+              <p className="text-sm text-gray-500 mt-1">
+                {item.product.description}
               </p>
-              {item.toppings.length > 0 && (
-                <p className="text-xs text-gray-400 mt-1">
-                  Extra: {item.toppings.join(', ')}
-                </p>
-              )}
             </div>
           </div>
 

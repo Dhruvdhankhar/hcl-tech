@@ -132,14 +132,8 @@ export default function OrderDetailsPage() {
                               {item.name || 'Product'}
                             </h3>
                             <p className="text-sm text-gray-500">
-                              {item.size && <span className="capitalize">{item.size}</span>}
-                              {item.crust && <span> • {item.crust}</span>}
+                              Qty: {item.quantity}
                             </p>
-                            {item.toppings && item.toppings.length > 0 && (
-                              <p className="text-xs text-gray-400">
-                                Extra: {item.toppings.join(', ')}
-                              </p>
-                            )}
                           </div>
                         </div>
                         <div className="flex justify-between mt-2">

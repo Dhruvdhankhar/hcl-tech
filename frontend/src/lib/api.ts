@@ -79,9 +79,6 @@ export const cartAPI = {
   addItem: (data: {
     productId: string;
     quantity: number;
-    size: string;
-    crust: string;
-    toppings: string[];
   }) => api.post('/cart/add', data),
   updateItem: (itemId: string, quantity: number) =>
     api.put(`/cart/update/${itemId}`, { quantity }),

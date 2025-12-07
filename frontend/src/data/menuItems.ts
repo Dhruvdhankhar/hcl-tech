@@ -10,24 +10,7 @@ export const menuItems: Product[] = [
     basePrice: 199,
     image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [
-      { name: 'small', price: 199 },
-      { name: 'medium', price: 349 },
-      { name: 'large', price: 549 }
-    ],
-    crusts: [
-      { name: 'Classic Hand Tossed', price: 0 },
-      { name: 'Cheese Burst', price: 99 },
-      { name: 'Thin Crust', price: 0 }
-    ],
-    toppings: [
-      { name: 'Extra Cheese', price: 59, isVeg: true },
-      { name: 'Black Olives', price: 49, isVeg: true },
-      { name: 'Jalapeno', price: 39, isVeg: true }
-    ],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '2',
@@ -37,24 +20,7 @@ export const menuItems: Product[] = [
     basePrice: 299,
     image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [
-      { name: 'small', price: 299 },
-      { name: 'medium', price: 449 },
-      { name: 'large', price: 649 }
-    ],
-    crusts: [
-      { name: 'Classic Hand Tossed', price: 0 },
-      { name: 'Cheese Burst', price: 99 },
-      { name: 'Thin Crust', price: 0 }
-    ],
-    toppings: [
-      { name: 'Extra Cheese', price: 59, isVeg: true },
-      { name: 'Paneer', price: 69, isVeg: true },
-      { name: 'Corn', price: 49, isVeg: true }
-    ],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '3',
@@ -64,24 +30,7 @@ export const menuItems: Product[] = [
     basePrice: 349,
     image: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [
-      { name: 'small', price: 349 },
-      { name: 'medium', price: 499 },
-      { name: 'large', price: 699 }
-    ],
-    crusts: [
-      { name: 'Classic Hand Tossed', price: 0 },
-      { name: 'Cheese Burst', price: 99 },
-      { name: 'Thin Crust', price: 0 }
-    ],
-    toppings: [
-      { name: 'Extra Cheese', price: 59, isVeg: true },
-      { name: 'Extra Paneer', price: 79, isVeg: true },
-      { name: 'Mushroom', price: 59, isVeg: true }
-    ],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '4',
@@ -91,24 +40,7 @@ export const menuItems: Product[] = [
     basePrice: 329,
     image: 'https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [
-      { name: 'small', price: 329 },
-      { name: 'medium', price: 479 },
-      { name: 'large', price: 679 }
-    ],
-    crusts: [
-      { name: 'Classic Hand Tossed', price: 0 },
-      { name: 'Cheese Burst', price: 99 },
-      { name: 'Thin Crust', price: 0 }
-    ],
-    toppings: [
-      { name: 'Extra Cheese', price: 59, isVeg: true },
-      { name: 'Jalapeno', price: 39, isVeg: true },
-      { name: 'Corn', price: 49, isVeg: true }
-    ],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '5',
@@ -118,24 +50,7 @@ export const menuItems: Product[] = [
     basePrice: 499,
     image: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&h=400&fit=crop',
     isVeg: false,
-    isAvailable: true,
-    sizes: [
-      { name: 'small', price: 499 },
-      { name: 'medium', price: 649 },
-      { name: 'large', price: 849 }
-    ],
-    crusts: [
-      { name: 'Classic Hand Tossed', price: 0 },
-      { name: 'Cheese Burst', price: 99 },
-      { name: 'Thin Crust', price: 0 }
-    ],
-    toppings: [
-      { name: 'Extra Cheese', price: 59, isVeg: true },
-      { name: 'Extra Chicken', price: 99, isVeg: false },
-      { name: 'Onion', price: 29, isVeg: true }
-    ],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '6',
@@ -145,24 +60,7 @@ export const menuItems: Product[] = [
     basePrice: 449,
     image: 'https://images.unsplash.com/photo-1590947132387-155cc02f3212?w=400&h=400&fit=crop',
     isVeg: false,
-    isAvailable: true,
-    sizes: [
-      { name: 'small', price: 449 },
-      { name: 'medium', price: 599 },
-      { name: 'large', price: 799 }
-    ],
-    crusts: [
-      { name: 'Classic Hand Tossed', price: 0 },
-      { name: 'Cheese Burst', price: 99 },
-      { name: 'Thin Crust', price: 0 }
-    ],
-    toppings: [
-      { name: 'Extra Cheese', price: 59, isVeg: true },
-      { name: 'Extra Chicken', price: 99, isVeg: false },
-      { name: 'Mushroom', price: 59, isVeg: true }
-    ],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '7',
@@ -172,24 +70,7 @@ export const menuItems: Product[] = [
     basePrice: 429,
     image: 'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?w=400&h=400&fit=crop',
     isVeg: false,
-    isAvailable: true,
-    sizes: [
-      { name: 'small', price: 429 },
-      { name: 'medium', price: 579 },
-      { name: 'large', price: 779 }
-    ],
-    crusts: [
-      { name: 'Classic Hand Tossed', price: 0 },
-      { name: 'Cheese Burst', price: 99 },
-      { name: 'Thin Crust', price: 0 }
-    ],
-    toppings: [
-      { name: 'Extra Cheese', price: 59, isVeg: true },
-      { name: 'Extra Chicken', price: 99, isVeg: false },
-      { name: 'Capsicum', price: 39, isVeg: true }
-    ],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '8',
@@ -199,24 +80,7 @@ export const menuItems: Product[] = [
     basePrice: 479,
     image: 'https://images.unsplash.com/photo-1595708684082-a173bb3a06c5?w=400&h=400&fit=crop',
     isVeg: false,
-    isAvailable: true,
-    sizes: [
-      { name: 'small', price: 479 },
-      { name: 'medium', price: 629 },
-      { name: 'large', price: 829 }
-    ],
-    crusts: [
-      { name: 'Classic Hand Tossed', price: 0 },
-      { name: 'Cheese Burst', price: 99 },
-      { name: 'Thin Crust', price: 0 }
-    ],
-    toppings: [
-      { name: 'Extra Cheese', price: 59, isVeg: true },
-      { name: 'Extra Chicken', price: 99, isVeg: false },
-      { name: 'Black Olives', price: 49, isVeg: true }
-    ],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
 
   // Beverages (8 items)
@@ -228,12 +92,7 @@ export const menuItems: Product[] = [
     basePrice: 57,
     image: 'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [],
-    crusts: [],
-    toppings: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '10',
@@ -243,12 +102,7 @@ export const menuItems: Product[] = [
     basePrice: 57,
     image: 'https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [],
-    crusts: [],
-    toppings: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '12',
@@ -258,12 +112,7 @@ export const menuItems: Product[] = [
     basePrice: 57,
     image: 'https://images.unsplash.com/photo-1624517452488-04869289c4ca?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [],
-    crusts: [],
-    toppings: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '13',
@@ -273,12 +122,7 @@ export const menuItems: Product[] = [
     basePrice: 57,
     image: 'https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [],
-    crusts: [],
-    toppings: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '14',
@@ -288,12 +132,7 @@ export const menuItems: Product[] = [
     basePrice: 57,
     image: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [],
-    crusts: [],
-    toppings: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '15',
@@ -303,12 +142,7 @@ export const menuItems: Product[] = [
     basePrice: 57,
     image: 'https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [],
-    crusts: [],
-    toppings: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
 
   // Desserts (8 items)
@@ -320,12 +154,7 @@ export const menuItems: Product[] = [
     basePrice: 99,
     image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [],
-    crusts: [],
-    toppings: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '18',
@@ -335,12 +164,7 @@ export const menuItems: Product[] = [
     basePrice: 119,
     image: 'https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [],
-    crusts: [],
-    toppings: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '19',
@@ -350,12 +174,7 @@ export const menuItems: Product[] = [
     basePrice: 109,
     image: 'https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?w=400&h=400&fit=crop&q=80',
     isVeg: true,
-    isAvailable: true,
-    sizes: [],
-    crusts: [],
-    toppings: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '20',
@@ -365,12 +184,7 @@ export const menuItems: Product[] = [
     basePrice: 99,
     image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [],
-    crusts: [],
-    toppings: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '21',
@@ -380,12 +194,7 @@ export const menuItems: Product[] = [
     basePrice: 59,
     image: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [],
-    crusts: [],
-    toppings: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '22',
@@ -395,12 +204,7 @@ export const menuItems: Product[] = [
     basePrice: 79,
     image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [],
-    crusts: [],
-    toppings: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '23',
@@ -410,12 +214,7 @@ export const menuItems: Product[] = [
     basePrice: 79,
     image: 'https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [],
-    crusts: [],
-    toppings: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   },
   {
     _id: '24',
@@ -425,11 +224,6 @@ export const menuItems: Product[] = [
     basePrice: 79,
     image: 'https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=400&h=400&fit=crop',
     isVeg: true,
-    isAvailable: true,
-    sizes: [],
-    crusts: [],
-    toppings: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    isAvailable: true
   }
 ];

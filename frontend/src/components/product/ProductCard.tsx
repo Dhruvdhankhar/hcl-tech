@@ -15,10 +15,7 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const [showCustomizer, setShowCustomizer] = useState(false);
 
-  const basePrice =
-    product.category === 'pizza'
-      ? product.sizes[0]?.price || product.basePrice
-      : product.basePrice;
+  const basePrice = product.basePrice;
 
   return (
     <>

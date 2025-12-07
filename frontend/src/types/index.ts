@@ -4,7 +4,6 @@ export interface User {
   name: string;
   email: string;
   phone: string;
-  role: 'customer' | 'admin';
   addresses: Address[];
   createdAt: string;
   updatedAt: string;
@@ -23,22 +22,6 @@ export interface Address {
 }
 
 // Product Types
-export interface Size {
-  name: 'small' | 'medium' | 'large';
-  price: number;
-}
-
-export interface Crust {
-  name: string;
-  price: number;
-}
-
-export interface Topping {
-  name: string;
-  price: number;
-  isVeg: boolean;
-}
-
 export interface Product {
   _id: string;
   name: string;
@@ -48,11 +31,6 @@ export interface Product {
   image: string;
   isVeg: boolean;
   isAvailable: boolean;
-  sizes: Size[];
-  crusts: Crust[];
-  toppings: Topping[];
-  createdAt: string;
-  updatedAt: string;
 }
 
 // Cart Types
@@ -60,16 +38,7 @@ export interface CartItem {
   _id: string;
   product: Product;
   quantity: number;
-  size: string;
-  crust: string;
-  toppings: string[];
   itemTotal: number;
-}
-
-export interface CartItemCustomization {
-  size?: string;
-  crust?: string;
-  toppings: string[];
 }
 
 export interface Cart {
@@ -85,9 +54,6 @@ export interface OrderItem {
   product: string;
   name: string;
   quantity: number;
-  size: string;
-  crust: string;
-  toppings: string[];
   price: number;
 }
 
